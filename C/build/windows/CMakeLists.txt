@@ -1,0 +1,13 @@
+cmake_minimum_required (VERSION 3.8)
+
+project ("Hornet")
+string (TOUPPER ${PROJECT_NAME} PROJECT_NAME_UPPER)
+add_compile_options (-D${PROJECT_NAME_UPPER}_WINDOWS)
+set (PROJECT_ROOT_PATH "../..")
+set (TOOLS_ROOT_PATH ${PROJECT_ROOT_PATH}/tools)
+link_directories (${CMAKE_BINARY_DIR})
+include (../${PROJECT_NAME}.cmake)
+target_link_libraries (${PROJECT_NAME}-Shared Ws2_32.dll)
+target_link_libraries (${PROJECT_NAME}-Static Ws2_32.lib)
+target_link_libraries (${PROJECT_NAME}EchoClient Ws2_32.lib ${PROJECT_NAME}.lib)
+target_link_libraries (${PROJECT_NAME}EchoServer Ws2_32.lib ${PROJECT_NAME}.lib)
